@@ -1,7 +1,9 @@
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
-cmake_minimum_required(VERSION 2.6.0)
+cmake_minimum_required(VERSION 3.6.0)
 
 project(Replica)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}/cmake/")
 
@@ -20,6 +22,9 @@ if(NOT ${Pangolin_FOUND})
     set(Pangolin_INCLUDE_DIRS "${THIRD_PARTY}/Pangolin/build/src/include")
     list(APPEND Pangolin_INCLUDE_DIRS "${THIRD_PARTY}/Pangolin/include")
     set(Pangolin_LIBRARIES "${THIRD_PARTY}/Pangolin/build/src/libpangolin.so")
+else()
+    list(REMOVE_ITEM Pangolin_LIBRARIES "pango_python")
+    list(REMOVE_ITEM Pangolin_LIBRARY "pango_python")
 endif()
 
 find_package(dl REQUIRED)

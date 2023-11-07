@@ -7,6 +7,7 @@
 #include <GL/glew.h>
 #include <dlfcn.h>
 #include <cstring>
+#include <X11/Xlib.h>
 
 EGLCtx::EGLCtx(const bool createCtx, const int cudaDevice, const bool createSurface)
     : lib("libEGL.so"), createdCtx(createCtx) {
@@ -128,7 +129,7 @@ EGLCtx::EGLCtx(const bool createCtx, const int cudaDevice, const bool createSurf
       display = eglGetPlatformDisplayEXT(EGL_PLATFORM_X11_KHR, x11, 0);
     }
     ASSERT(display != EGL_NO_DISPLAY, "Can't create EGL display");
-    
+
     EGLint major, minor;
     ASSERT(eglInitialize(display, &major, &minor), "Can't init EGL");
 
@@ -160,7 +161,7 @@ EGLCtx::EGLCtx(const bool createCtx, const int cudaDevice, const bool createSurf
     if (err == GLEW_ERROR_NO_GLX_DISPLAY) {
         std::cout << "Can't initialize EGL GLEW GLX display, may crash!" << std::endl;
     }
-    else 
+    else
 #endif
     if (err != GLEW_OK) {
         ASSERT(false, "Can't initialize EGL, glewInit failing completely.");

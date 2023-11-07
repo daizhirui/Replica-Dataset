@@ -1,5 +1,5 @@
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
-cmake_minimum_required(VERSION 2.6.0)
+cmake_minimum_required(VERSION 3.6.0)
 
 project(ReplicaSDK)
 
